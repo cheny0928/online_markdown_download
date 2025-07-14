@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>在线教程手册下载器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; }
+        .container { max-width: 480px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px 24px; }
+        h2 { text-align: center; margin-bottom: 24px; }
+        label { display: block; margin-top: 16px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 6px; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; background: #4CAF50; color: #fff; border: none; padding: 12px; border-radius: 4px; font-size: 16px; margin-top: 24px; cursor: pointer; }
+        button:hover { background: #388e3c; }
+        .error { color: #d32f2f; margin-top: 12px; text-align: center; }
+        .tip { color: #888; font-size: 13px; margin-top: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>在线教程手册下载器</h2>
+    <form method="post" action="/form_download/">
+        <label for="url">下载URL <span style="color:#d32f2f">*</span></label>
+        <input type="url" id="url" name="url" required placeholder="如：https://docs.wxauto.org/docs/">
+
+        <label for="type_">元素类型(type) <span style="color:#d32f2f">*</span></label>
+        <select id="type_" name="type_" required>
+            <option value="class">class</option>
+            <option value="id">id</option>
+            <option value="tag">tag</option>
+        </select>
+
+        <label for="value">元素值(value) <span style="color:#d32f2f">*</span></label>
+        <input type="text" id="value" name="value" required placeholder="如：hextra-scrollbar">
+
+        <label for="filename">输出文件名 <span style="color:#d32f2f">*</span></label>
+        <input type="text" id="filename" name="filename" required placeholder="如：wxauto使用说明.md">
+
+        <label for="pre_remove_type">预移除元素类型(可选)</label>
+        <input type="text" id="pre_remove_type" name="pre_remove_type" placeholder="如：class">
+        <span class="tip">如需批量移除广告、页脚等元素</span>
+
+        <label for="pre_remove_value">预移除元素值(可选)</label>
+        <input type="text" id="pre_remove_value" name="pre_remove_value" placeholder="如：ad-banner|footer">
+        <span class="tip">多个值用 | 分隔</span>
+
+        <button type="submit">开始下载</button>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </form>
+</div>
+</body>
+</html> 

@@ -95,6 +95,29 @@ downloader = MarkdownDownloader(base_url, config)
 downloader.run()  # 会生成downloads/ori_html/域名/下的html和downloads/域名/all_in_one.md
 ```
 
+### 4. 网页可视化界面使用
+
+本项目内置了一个网页前端，支持通过浏览器可视化填写参数并一键下载Markdown文件。
+
+#### 启动服务
+
+```bash
+uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+#### 使用方法
+1. 启动服务后，在浏览器访问：http://127.0.0.1:8000
+2. 填写各项参数：
+   - **下载URL**：教程主页网址
+   - **元素类型(type)**：选择 class、id 或 tag
+   - **元素值(value)**：目标元素的值
+   - **输出文件名**：下载保存的Markdown文件名
+   - **预移除元素类型/值**（可选）：如需批量移除广告、页脚等元素，可填写类型和值（多个值用 | 分隔）
+3. 点击“开始下载”按钮，页面会自动下载生成的Markdown文件。
+4. 如遇错误，页面会有红色提示。
+
+> 前端页面无需额外配置，所有功能均已集成在本项目中。
+
 ## 文件结构说明
 
 - `downloads/ori_html/域名/` 目录下：
